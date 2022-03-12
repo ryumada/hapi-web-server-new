@@ -50,6 +50,30 @@ const routes = [
     }
   },
   {
+    method: 'POST',
+    path: '/indexes/{index?}',
+    handler: (request, h) => {
+      const data = ['A', 'B'];
+      const { index } = request.params;
+
+      const selectedIndex = data.find((value) => (value === index ? value : null));
+
+      console.log(selectedIndex);
+
+      if (selectedIndex) {
+        return `Index ${selectedIndex}!`;
+      }
+
+      const response = h.response(JSON.stringify({
+        message: 'Wrong Index?!'
+      }))
+        .code(400)
+        .type('application/json');
+        
+      return response;
+    }
+  },
+  {
     method: '*',
     path: '/{any*}',
     handler: (request, h) => {
