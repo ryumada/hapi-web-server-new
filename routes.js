@@ -10,7 +10,7 @@ const routes = [
     method: '*',
     path: '/',
     handler: (request, h) => {
-      return `Page cannot be accessed by ${} method`;
+      return `Page cannot be accessed by ${request.method} method`;
     }
   },
   {
@@ -25,6 +25,14 @@ const routes = [
     path: '/about',
     handler: (request, h) => {
       return `Page cannot be accessed by ${request.method} method`;
+    }
+  },
+  {
+    method: 'GET',
+    path: '/hello/{name?}', // optional path parameter
+    handler: (request, h) => {
+      const { name = 'stranger' } = request.params;
+      return `Hello ${name} !`;
     }
   },
   {
